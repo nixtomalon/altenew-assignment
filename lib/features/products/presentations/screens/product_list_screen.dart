@@ -1,10 +1,8 @@
-import 'package:altenew_assignment/core/constants/strings.dart';
-import 'package:altenew_assignment/features/products/data/models/product.dart';
-import 'package:altenew_assignment/features/products/presentations/bloc/bloc/product_bloc.dart';
+import 'package:altenew_assignment/features/products/domain/entities/product.dart';
+import 'package:altenew_assignment/features/products/presentations/bloc/product_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 
 class ProductListScreen extends StatefulWidget {
   const ProductListScreen({super.key});
@@ -58,41 +56,32 @@ class _ProductListScreenState extends State<ProductListScreen> {
           ),
         ],
       ),
-      body: Query(
-        options: QueryOptions(
-          document: gql(productList),
-          variables: {"handle": "alcohol-markers"},
-          pollInterval: const Duration(seconds: 10),
-        ),
-        builder: (QueryResult result,
-            {VoidCallback? refetch, FetchMore? fetchMore}) {
-          if (result.hasException) {
-            return Text(result.exception.toString());
+      body: Padding(
+        padding: EdgeInsets.all(16),
+        child:
+            BlocBuilder<ProductBloc, ProductState>(builder: (context, state) {
+          if (state is ProductLoaded || state is ProductCartLoaded) {
+            return GridView.count(
+              crossAxisCount: 2,
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 12,
+              padding: const EdgeInsets.all(16),
+              children:
+                  state.products!.map((p) => ProductItem(product: p)).toList(),
+            );
           }
-
-          if (result.isLoading) {
-            return const Text('Loading');
+          if (state is ProductLoading) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           }
-
-          List? products =
-              result.data?['collectionByHandle']?['products']?['edges'];
-
-          if (products == null) {
-            return const Text('No products found');
+          if (state is ProductError) {
+            return Center(
+              child: Text(state.error.toString()),
+            );
           }
-
-          return GridView.count(
-            crossAxisCount: 2,
-            crossAxisSpacing: 8,
-            mainAxisSpacing: 8,
-            padding: const EdgeInsets.all(16),
-            children: products
-                .map((product) => ProductItem(
-                      product: Product.fromJson(product['node']),
-                    ))
-                .toList(),
-          );
-        },
+          return SizedBox();
+        }),
       ),
     );
   }
@@ -104,7 +93,7 @@ class ProductItem extends StatelessWidget {
     required this.product,
   });
 
-  final Product product;
+  final ProductEntity product;
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +119,7 @@ class ProductItem extends StatelessWidget {
             CachedNetworkImage(
               imageUrl: product.imageUrl,
               imageBuilder: (context, imageProvider) => Container(
-                height: MediaQuery.of(context).size.height / 8,
+                height: MediaQuery.of(context).size.height / 8.8,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: imageProvider,

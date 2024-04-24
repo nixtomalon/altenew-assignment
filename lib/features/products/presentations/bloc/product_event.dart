@@ -10,7 +10,7 @@ abstract class ProductEvent extends Equatable {
 class GetProductsEvent extends ProductEvent {}
 
 class AddToCartEvent extends ProductEvent {
-  final Product product;
+  final ProductEntity product;
 
   AddToCartEvent(this.product);
 

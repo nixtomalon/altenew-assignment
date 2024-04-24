@@ -1,12 +1,12 @@
-import 'package:altenew_assignment/features/products/data/models/product.dart';
-import 'package:altenew_assignment/features/products/presentations/bloc/bloc/product_bloc.dart';
+import 'package:altenew_assignment/features/products/domain/entities/product.dart';
+import 'package:altenew_assignment/features/products/presentations/bloc/product_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  final Product product;
+  final ProductEntity product;
   const ProductDetailsScreen({super.key, required this.product});
 
   @override
