@@ -1,9 +1,9 @@
 part of 'product_bloc.dart';
 
 abstract class ProductState extends Equatable {
-  final List<Product>? products;
-  final DioException? error;
-  final List<Product>? carts;
+  final List<ProductEntity>? products;
+  final Exception? error;
+  final List<ProductEntity>? carts;
 
   const ProductState({this.products, this.error, this.carts});
 
@@ -18,13 +18,15 @@ class ProductLoading extends ProductState {
 }
 
 class ProductLoaded extends ProductState {
-  const ProductLoaded(List<Product> products) : super(products: products);
+  const ProductLoaded(List<ProductEntity> products) : super(products: products);
 }
 
 class ProductCartLoaded extends ProductState {
-  const ProductCartLoaded(List<Product> carts) : super(carts: carts);
+  const ProductCartLoaded(
+      List<ProductEntity> carts, List<ProductEntity> products)
+      : super(carts: carts, products: products);
 }
 
 class ProductError extends ProductState {
-  const ProductError(DioException error) : super(error: error);
+  const ProductError(Exception error) : super(error: error);
 }

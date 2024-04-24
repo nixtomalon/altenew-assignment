@@ -1,8 +1,7 @@
 import 'package:altenew_assignment/core/resources/data_state.dart';
-import 'package:altenew_assignment/features/products/data/models/product.dart';
+import 'package:altenew_assignment/features/products/domain/entities/product.dart';
 import 'package:altenew_assignment/features/products/domain/usecases/get_products.dart';
 import 'package:bloc/bloc.dart';
-import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
 part 'product_event.dart';
@@ -11,12 +10,11 @@ part 'product_state.dart';
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final GetProducts _getProduct;
   ProductBloc(this._getProduct) : super(ProductInitial()) {
-    on<GetProductsEvent>(getProductList);
+    on<GetProductsEvent>(fetchProducts);
     on<AddToCartEvent>(addToCart);
   }
 
-  void getProductList(
-      GetProductsEvent event, Emitter<ProductState> emit) async {
+  void fetchProducts(GetProductsEvent event, Emitter<ProductState> emit) async {
     emit(ProductLoading());
 
     final dataState = await _getProduct();
@@ -30,8 +28,9 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   }
 
   void addToCart(AddToCartEvent event, Emitter<ProductState> emit) {
+    final products = state.products;
     final carts = state.carts ?? [];
     carts.add(event.product);
-    emit(ProductCartLoaded(carts));
+    emit(ProductCartLoaded(carts, products!));
   }
 }
