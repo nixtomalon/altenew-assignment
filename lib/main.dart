@@ -13,7 +13,7 @@ void main() async {
   final HttpLink httpLink = HttpLink(
       'https://testaltenew.myshopify.com/admin/api/2024-04/graphql.json',
       defaultHeaders: {
-        'X-Shopify-Access-Token': 'access_token',
+        'X-Shopify-Access-Token': 'ACCESS_TOKEN',
       });
 
   ValueNotifier<GraphQLClient> client = ValueNotifier(
