@@ -19,6 +19,13 @@ This Flutter app demonstrates how to integrate with the Shopify API to fetch a l
 |--------------|----------------|
 | <img src="https://github.com/nixtomalon/altenew-assignment/blob/main/assets/list.png" width="185"/> | <img src="https://github.com/nixtomalon/altenew-assignment/blob/main/assets/detail.png" width="185"/> |
 
+## Architecture Overview
+
+This project is structured based on Clean Architecture guidelines. Here's a brief overview:
+
+``Domain Layer``: Contains business logic and entities.
+``Data Layer``: Includes data models, data sources, and repository implementations.
+``Presentation Layer``: Composed of screens and widgets, managed by BLoC components.
 
 ### State Management
 
@@ -28,15 +35,7 @@ This app uses ``Business Logic Components (BLoC)`` pattern for managing state an
 
 For remote integration it uses ``GraphQL Integration`` and ``Dio Package`` Efficient and flexible data retrieval with GraphQL and Http from a remote server
 
-### Architecture Overview
-
-This project is structured based on Clean Architecture guidelines. Here's a brief overview:
-
-``Domain Layer``: Contains business logic and entities.
-``Data Layer``: Includes data models, data sources, and repository implementations.
-``Presentation Layer``: Composed of screens and widgets, managed by BLoC components.
-
-### Prerequisites
+## Prerequisites
 
 - Flutter (Version: 3.19.2) Stable channel
 - Dart (Version: 3.3.0)
