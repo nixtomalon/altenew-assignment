@@ -1,7 +1,3 @@
-# altenew_assignment
-
-Altenew Assignment
-
 ## Shopify API Example Flutter App
 
 This Flutter app demonstrates how to integrate with the Shopify API to fetch a list of products for a collection and display the product details.
@@ -23,9 +19,9 @@ This Flutter app demonstrates how to integrate with the Shopify API to fetch a l
 
 This project is structured based on Clean Architecture guidelines. Here's a brief overview:
 
-``Domain Layer``: Contains business logic and entities.
-``Data Layer``: Includes data models, data sources, and repository implementations.
-``Presentation Layer``: Composed of screens and widgets, managed by BLoC components.
+- **Domain Layer**: Contains business logic and entities.
+- **Data Layer**: Includes data models, data sources, and repository implementations.
+- **Presentation Layer**: Composed of screens and widgets, managed by BLoC components.
 
 ### State Management
 
