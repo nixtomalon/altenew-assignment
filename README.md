@@ -17,7 +17,7 @@ This Flutter app demonstrates how to integrate with the Shopify API to fetch a l
 ## Screenshot
 | Product List | Product Detail |
 |--------------|----------------|
-| <img src="https://github.com/nixtomalon/altenew_assignment/blob/main/assets/product_list.png" width="185"/> | <img src="https://github.com/nixtomalon/altenew_assignment/blob/main/assets/product_detail.png" width="185"/> |
+| <img src="https://github.com/nixtomalon/altenew-assignment/blob/main/assets/product_list.png" width="185"/> | <img src="https://github.com/nixtomalon/altenew-assignment/blob/main/assets/product_detail.png" width="185"/> |
 
 
 ### State Management
